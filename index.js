@@ -5,14 +5,14 @@ let arr = [1, 2, 3, 4];
  * Reduce function.
  */
 Array.prototype.reduce = function (...args) {
-    let func = args[1];
-    let array = args[0];
+    let func = args[0];
+    let array = this;
     let temp = 0;
     array.forEach(element => {
         temp = func.apply(this, [temp, element]);
     });
-    if (args.length > 2) {
-        return (temp + args[2]);
+    if (args.length === 2) {
+        return (temp + args[1]);
     } else {
         return temp;
     }
@@ -22,16 +22,17 @@ let reducer = (accumulator, currentValue) => {
     return (accumulator + currentValue)
 }
 console.log('reduce function result:')
-console.log(arr.reduce(arr, reducer));
-console.log(arr.reduce(arr, reducer, 15));
+console.log(arr.reduce(reducer));
+console.log(arr.reduce(reducer, 15));
 
 
 /**
  * MAP function.
  */
 
-Array.prototype.map = function (arr, func) {
+Array.prototype.map = function (func) {
     let tempArr = [];
+    let arr = this;
     for (let i = 0; i < arr.length; i++) {
         let result = func(arr[i]);
         tempArr.push(result);
@@ -39,7 +40,7 @@ Array.prototype.map = function (arr, func) {
     return tempArr;
 }
 console.log('Map function result:')
-arr.map(arr, (x) => {
+arr.map((x) => {
     console.log(x);
 });
 
@@ -48,7 +49,8 @@ arr.map(arr, (x) => {
  * Filter function.
  */
 
-Array.prototype.filter = function (arr, predicate) {
+Array.prototype.filter = function (predicate) {
+    let arr = this;
     let tempArr = [];
     for (let i = 0; i < arr.length; i++) {
         let result = predicate.call(this, arr[i]);
@@ -64,7 +66,7 @@ isEven = (val) => {
     return (val > 1)
 }
 console.log('filter function result:')
-console.log(arr.filter(arr, isEven));
+console.log(arr.filter(isEven));
 
 
 
