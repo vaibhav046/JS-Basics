@@ -123,7 +123,6 @@ console.log(new Food('cheese', 5).name);
 
 Function.prototype.myOwnApply = function (reference, args) {
     var self = this;
-    console.log(self);
     self.call(reference, ...args)
 }
 
@@ -136,4 +135,6 @@ person1 = function (city, country) {
     this.lastName = "Doe"
     fullName.myOwnApply(this, [city, country]);
 };
-console.log(new person1('oslo', 'norway').country);
+console.log("apply function results:");
+
+console.log(new person1('oslo', 'norway').city);
